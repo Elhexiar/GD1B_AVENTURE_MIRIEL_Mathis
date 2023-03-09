@@ -21,7 +21,7 @@
                 physics: {
                     default: 'arcade',
                     arcade: {
-                    gravity: { y: 400 },
+                    gravity: { y: 0 },
                     debug: true
                     }
                 },
@@ -147,7 +147,7 @@
                 //spawn du joueur
                 this.player = this.physics.add.sprite(playerStats.SpawnXcoord, playerStats.SpawnYcoord, 'perso');
 
-                this.player.setBounce(0.05);
+                
                 this.player.setCollideWorldBounds(false);
 
 
@@ -183,8 +183,7 @@
 
                 this.physics.add.collider(checkpoint,calque_plateformes)
 
-                this.physics.add.overlap(obstacle,this.player,hitObstacle,null,this)
-                this.physics.add.overlap(checkpoint,this.player,hitCheckpoint,null,this)
+
 
                 
                 
@@ -248,200 +247,41 @@
 
             function update(){
 
-
-                //UI_HP.x = this.player.x
-                //UI_HP.y = this.player.y
-                UI_HP.anims.play('0'+playerStats.Global_HP+'HP',true);
-
-                this.walljumpCooldown = this.walljumpCooldown + 1
-                this.ancorTimer = this.ancorTimer +1
-                this.autoWalljumpCooldown = this.autoWalljumpCooldown +1
-
-                
-                if(playerStats.invincible = true){
-                    
-                    playerStats.iframe = playerStats.iframe +1;
-                    
-                    if(playerStats.iframe>50){
-                        playerStats.invincible = false
+                if (cursors.right.isDown)                           
+                    {                               
+                                 
+                        this.player.setVelocityX(playerStats.playerSpeed);                                                 
+                    } 
+                else if (cursors.left.isDown)                           
+                    {                               
+                              
+                        this.player.setVelocityX(-playerStats.playerSpeed);                                                          
+                    }                                                   
+                else {
+                    this.player.setVelocityX(0);
+                }
+                if (cursors.up.isDown)                           
+                    {                               
+                               
+                        this.player.setVelocityY(-playerStats.playerSpeed);                                               
                     }
-                }
+                                                                   
+                else if (cursors.down.isDown)                           
+                    {                               
+                              
+                        this.player.setVelocityY(playerStats.playerSpeed);                                                            
+                    } 
 
-                
-
-                
-
-                
-
-
-
-                
-
-                if (gameOver){return;}
-
-                if (cursors.left.isDown){
-
-                    // si ca fait moins de 20 frame qu'un wall jump a été déclancher alors force la direction
-                    if(this.autoWalljumpCooldown<20){
-                        this.player.setVelocityX(playerStats.playerSpeed); //alors vitesse positive en X
-                        this.player.anims.play('right', true); //et animation => droite
-                        
-
-                    } else {
-                        this.player.setVelocityX(-playerStats.playerSpeed); //alors vitesse négative en X
-                        this.player.anims.play('left', true); //et animation => gauche
-                    }
-                }
-                else if (cursors.right.isDown){ //sinon si la touche droite est appuyée
-
-                    // si ca fait moins de 20 frame qu'un wall jump a été déclancher alors force la direction
-                    if(this.autoWalljumpCooldown<20){
-                        this.player.setVelocityX(-playerStats.playerSpeed); //alors vitesse négative en X
-                        this.player.anims.play('left', true); //et animation => gauche
-
-                    }else {
-                        this.player.setVelocityX(playerStats.playerSpeed); //alors vitesse positive en X
-                        this.player.anims.play('right', true); //et animation => droite
-                    }
-                }
-                else{ // sinon
-                    this.player.setVelocityX(0); //vitesse nulle
-                    this.player.anims.play('turn'); //animation fait face caméra
-                }
-
-
-                // Regular jump
-                if ((keySpace.isDown && this.player.body.blocked.down) ){
-                    //si touche haut appuyée ET que le perso touche le sol
-                    this.player.setVelocityY(-playerStats.playerJump); //alors vitesse verticale négative
-
-                    // le joueur n'est plus autorisé a faire un saut normal
-                    this.canJump = false;
+                else {
                     
-
-
-
-
-                }
-                if(this.walljumpCooldown<40){
-
-                    //on force le status de la possibilité de walljump si ca fait plus de 40 frame qu'aucun n'a été fait
-                this.canWallJump = false;
-                }
-
-
-                //Ancor , le joueur s'acroche a un mur si il appuye sur une des direction en alors qu'il touche un mur et que cela fait + de 40 frames qu'il n'a pas wall jump
-                if (((cursors.left.isDown||cursors.right.isDown) && this.onWall==true && this.ancorTimer> 40)){
-                    this.player.setVelocityY(0); //alors ON FORCE le fait de ne pas tombé ca fait "glisser" le joueur d'un pixel par frame cependant
-
-                    // tant qu'il maintient la direction cela force les valeurs suivantes
-                    this.ancored = true;
-                    this.ancorTimer = 0;
-                    this.canWallJump = true;
-
-                }
-                
-                //wall jump
-                if (this.ancored == true && keySpace.isDown && this.canWallJump){
-                    this.player.setVelocityY(-playerStats.playerJump); //alors vitesse verticale négative
-
-                    this.ancored = false;
-
-                    // ne peux pas a nouveau fert un saut simple (au cas ou)
-                    this.canWallJump = false;
-
-                    // n'est plus sur le mur
-                    this.onWall = false;
-
-                    // On reset les cooldown pour le walljump (walljumpcooldown n'est la que pour le debug)
-                    this.walljumpCooldown = 0;
-                    this.autoWalljumpCooldown = 0;
-                }
-
-                //on verifie les différentes conditions
-                if(this.onWall == false){
-                    this.ancored=false
-                }
-
-                if(this.ancored == true){
-                    //alors ON FORCE le fait de ne pas tombé ca fait "glisser" le joueur d'un pixel par frame cependant (a nouveau pour etre sur)
                     this.player.setVelocityY(0);
-                    
-                }
-                
-
-                if (cursors.down.isDown && !this.player.body.touching.down){ //si la touche bas est appuyée en saut
-                    this.player.setVelocityY(450); 
-                } 
-
-                if(this.player.body.blocked.down){
- 
-                    // hero can jump
-                    this.canJump = true;
-
-                    this.canWallJump = true;
-
-                    // hero not on the wall
-                    this.onWall = false;
-                }
-
-
-
-                if((this.player.body.blocked.left && !this.player.body.blocked.down)||(this.player.body.blocked.right && !this.player.body.blocked.down)){
-
-                    this.onWall = true;
-                }else{
-                    this.onWall = false;
-                }
-
-
-            }
-
-            function hitObstacle(player,obstacle){
-
-                
-
-
-                if(playerStats.invincible == false){
-
-                    console.log("hit");
-
-                    playerStats.Global_HP = playerStats.Global_HP-1
-                    playerStats.invincible = true;
-                    playerStats.iframe = 0;
-
-                if(playerStats.Global_HP<=0){
-                    playerStats.Global_HP = 3;
-                    player.x = playerStats.SpawnXcoord;
-                    player.y = playerStats.SpawnYcoord;
-                }
-
-                }
-                
-
-            }
-
-            function hitCheckpoint(player,obstacle){
-
-                console.log("check");
-
-                obstacle.disableBody(true,true);
-                playerStats.checkpoint_nb = playerStats.checkpoint_nb +1;
-
-                if(playerStats.checkpoint_nb == 1){
-
-                    playerStats.SpawnXcoord = 1295;
-                    playerStats.SpawnYcoord = 1500;
-                }
-                if(playerStats.checkpoint_nb == 2){
-
-                playerStats.SpawnXcoord = 143;
-                playerStats.SpawnYcoord = 380;
                 }
 
 
 
             }
+
+
 
 
 

@@ -1,0 +1,42 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "1erdraft.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "1erdraft.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 393.939393939394,
+                "y": 345.4545454545455
+            }
+        },
+        "temp tileset.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/Ressources",
+    "map.fixedSize": false,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "openFiles": [
+        "1erdraft.tmx",
+        "temp tileset.tsx"
+    ],
+    "project": "1er draft map.tiled-project",
+    "recentFiles": [
+        "temp tileset.tsx",
+        "1erdraft.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
