@@ -6,6 +6,7 @@
     "activeFile": "1erdraft.tmx",
     "expandedProjectPaths": [
     ],
+    "exportAsImage.includeBackgroundColor": true,
     "fileStates": {
         "": {
             "scaleInDock": 0.25
@@ -23,8 +24,10 @@
             "scaleInEditor": 1
         }
     },
+    "last.exportedFilePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/proto 1/assets",
     "last.imagePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/Ressources",
     "map.fixedSize": false,
+    "map.lastUsedExportFilter": "Tous les Fichiers (*)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 64,
     "map.tileWidth": 64,
