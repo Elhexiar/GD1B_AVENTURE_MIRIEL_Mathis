@@ -7,6 +7,9 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 0.25
+        },
         "1erdraft.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
@@ -30,10 +33,12 @@
         "temp tileset.tsx"
     ],
     "project": "1er draft map.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "temp tileset.tsx",
         "1erdraft.tmx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 64,
