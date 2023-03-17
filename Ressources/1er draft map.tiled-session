@@ -5,6 +5,7 @@
     },
     "activeFile": "1erdraft.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "exportAsImage.includeBackgroundColor": true,
     "fileStates": {
@@ -12,15 +13,15 @@
             "scaleInDock": 0.25
         },
         "1erdraft.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 393.939393939394,
-                "y": 345.4545454545455
+                "x": 1702,
+                "y": 3798
             }
         },
         "temp tileset.tsx": {
-            "scaleInDock": 0.5,
+            "scaleInDock": 0.25,
             "scaleInEditor": 1
         }
     },
