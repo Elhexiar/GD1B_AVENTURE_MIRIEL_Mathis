@@ -122,8 +122,8 @@
                 
                 this.input.on('pointermove', function (pointer,playerStats) {
 
-                light.x = playerStats.x-450 + pointer.x;
-                light.y = playerStats.y-450 + pointer.y;
+                light.x = pointer.x*10;
+                light.y = pointer.y*10;
                 console.log(light.x,light.y); 
                 console.log(playerStats.x,playerStats.y); 
 
@@ -152,7 +152,7 @@
                 this.cameras.main.setBounds(0, 0, 4096, 6144);
                 // ancrage de la caméra sur le joueur
                 this.cameras.main.startFollow(this.player); 
-                this.cameras.main.zoom = 1;
+                this.cameras.main.zoom = 0.1;
 
                 this.anims.create({
                     key: 'left',
