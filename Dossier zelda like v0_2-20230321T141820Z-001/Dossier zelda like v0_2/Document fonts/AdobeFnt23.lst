@@ -1,0 +1,26 @@
+%!Adobe-FontList 1.23
+%Locale:0x40c
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:BankGothicBT-Medium
+FamilyName:BankGothic Md BT
+StyleName:Medium
+FullName:Bank Gothic Medium BT
+MenuName:BankGothic Md BT
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\MIRIEL Mathis\Zelda Like\save ind\Dossier zelda like v0_2\Document fonts\bgothm.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:35908
+FileModTime:1626178211
+WeightClass:400
+WidthClass:6
+AngleClass:0
+NameArray:0,Mac,4,Bank Gothic Medium BT
+NameArray:0,Win,1,BankGothic Md BT
+%EndFont
+
