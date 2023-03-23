@@ -73,7 +73,10 @@
                 SpawnXcoord : 1750,
                 SpawnYcoord : 5150,
                 x : 1750,
-                y: 5150
+                y: 5150,
+
+                mouse_x : 0,
+                mouse_y : 0
 }
 
 
@@ -112,22 +115,38 @@
                 this.physics.add.collider(this.player, calque_mur);
 
                 calque_sol.setPipeline('Light2D').setScrollFactor(1.0);
-                //calque_mur.setPipeline('Light2D');
+                calque_mur.setPipeline('Light2D');
+                calque_obstacle.setPipeline('Light2D');
 
 
-                light = this.lights.addLight(1750, 100, 100).setColor(0xff0000).setIntensity(3.0).setScrollFactor(1.0);
+                light = this.lights.addLight(0, 0, 200).setIntensity(0.5).setScrollFactor(1.0);
 
-                this.lights.enable().setAmbientColor(0x555555);
+                this.lights.enable().setAmbientColor(0x000000);
 
                 
-                this.input.on('pointermove', function (pointer,playerStats) {
+                this.input.on('pointermove', function PointerMoved(pointer) {
 
-                light.x = pointer.x*10;
-                light.y = pointer.y*10;
-                console.log(light.x,light.y); 
-                console.log(playerStats.x,playerStats.y); 
+
+                radius = 100;
+
+                playerStats.mouse_x = (pointer.x)+playerStats.x-450;
+                playerStats.mouse_y = (pointer.y)+playerStats.y-450;
+                distance = Phaser.Math.Distance.Between(playerStats.x,playerStats.y,playerStats.mouse_x,playerStats.mouse_y)
+                angle = Phaser.Math.Angle.Between(playerStats.mouse_x,playerStats.mouse_y,playerStats.x,playerStats.y)
+
+                light.x = playerStats.x - Math.cos(angle)*radius;
+                light.y = playerStats.y - Math.sin(angle)*radius;
+
+                console.log(light.x,light.y);
+                console.log(playerStats.mouse_x,playerStats.mouse_y) 
+                console.log(Math.abs( Math.cos(angle)*radius),Math.abs(Math.sin(angle)*radius));
+                console.log(angle); 
+                
+                
 
                 });
+
+                
 
                 //this.lights.addLight(playerStats.x, playerStats.y, 100).setColor(0xff0000).setIntensity(3.0);
 
@@ -152,7 +171,7 @@
                 this.cameras.main.setBounds(0, 0, 4096, 6144);
                 // ancrage de la caméra sur le joueur
                 this.cameras.main.startFollow(this.player); 
-                this.cameras.main.zoom = 0.1;
+                this.cameras.main.zoom = 1;
 
                 this.anims.create({
                     key: 'left',
@@ -185,36 +204,36 @@
 
             function update(){
 
+
                 playerStats.x = this.player.x;
                 playerStats.y = this.player.y;
 
+                var graphics = this.add.graphics({ lineStyle: { width: 4, color: 0xaa00aa } });
+
+                graphics.strokeLineShape(playerStats.x,playerStats.y,playerStats.mouse_x,playerStats.mouse_y);
+
                 if (cursors.right.isDown)                           
                     {                               
-                                 
                         this.player.setVelocityX(playerStats.playerSpeed);                                                 
                     } 
                 else if (cursors.left.isDown)                           
                     {                               
-                              
                         this.player.setVelocityX(-playerStats.playerSpeed);                                                          
                     }                                                   
                 else {
                     this.player.setVelocityX(0);
                 }
                 if (cursors.up.isDown)                           
-                    {                               
-                               
+                    {                              
                         this.player.setVelocityY(-playerStats.playerSpeed);                                               
                     }
                                                                    
                 else if (cursors.down.isDown)                           
                     {                               
-                              
                         this.player.setVelocityY(playerStats.playerSpeed);                                                            
                     } 
 
                 else {
-                    
                     this.player.setVelocityY(0);
                 }
 
