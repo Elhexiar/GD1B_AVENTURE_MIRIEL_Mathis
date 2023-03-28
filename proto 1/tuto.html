@@ -48,6 +48,7 @@
                 this.load.image('checkpoint','assets/checkpoint.png')
                 this.load.image('BigSaw','assets/Big_saw.png')
                 this.load.image('Small_Saw','assets/Small_saw.png')
+                this.load.image('plate', 'assets/plate.png')
             }
 
 
@@ -221,6 +222,8 @@
                 
                 cursors = this.input.keyboard.createCursorKeys();
 
+                this.physics.add.collider(spawn_plate_0,this.player,spawn_plate_triggered(spawn_plate_0),null,this);
+
 
             }
 
@@ -283,6 +286,12 @@
 
                 light.x = playerStats.x - Math.cos(playerStats.light_angle)*playerStats.light_radius;
                 light.y = playerStats.y - Math.sin(playerStats.light_angle)*playerStats.light_radius;
+
+                
+
+            }
+
+            function spawn_plate_triggered(plate_object){
 
                 
 
