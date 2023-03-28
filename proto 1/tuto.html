@@ -76,7 +76,19 @@
                 y: 5150,
 
                 mouse_x : 0,
-                mouse_y : 0
+                mouse_y : 0,
+
+                light_x : 0,
+                light_y : 0,
+                light_radius : 150,
+                lampe_intensity : 0.75,
+                light_angle : 0,
+
+                pointerDown : false,
+
+                default_light_color : 0xfff253
+
+
 }
 
 
@@ -119,7 +131,13 @@
                 calque_obstacle.setPipeline('Light2D');
 
 
-                light = this.lights.addLight(0, 0, 400).setIntensity(1).setScrollFactor(1.0);
+                lampe = this.lights.addLight(0, 0, 300).setIntensity(playerStats.lampe_intensity).setScrollFactor(1.0);
+
+                spawn_light00 = this.lights.addLight(1500, 5150, 300).setIntensity(1.5).setScrollFactor(1.0).setColor(playerStats.default_light_color);
+                spawn_light01 = this.lights.addLight(2020,5150,300).setIntensity(1.5).setScrollFactor(1.0).setColor(playerStats.default_light_color);
+
+                corridor0_light00 = this.lights.addLight(1580,4750,300).setIntensity(1.5).setScrollFactor(1.0).setColor(playerStats.default_light_color);
+                corridor0_light00 = this.lights.addLight(1940,4750,300).setIntensity(1.5).setScrollFactor(1.0).setColor(playerStats.default_light_color);
 
                 this.lights.enable().setAmbientColor(0x000000);
 
@@ -127,24 +145,34 @@
                 this.input.on('pointermove', function PointerMoved(pointer) {
 
 
-                radius = 100;
 
                 playerStats.mouse_x = (pointer.x)+playerStats.x-450;
                 playerStats.mouse_y = (pointer.y)+playerStats.y-450;
-                distance = Phaser.Math.Distance.Between(playerStats.x,playerStats.y,playerStats.mouse_x,playerStats.mouse_y)
+                //distance = Phaser.Math.Distance.Between(playerStats.x,playerStats.y,playerStats.mouse_x,playerStats.mouse_y)
                 angle = Phaser.Math.Angle.Between(playerStats.mouse_x,playerStats.mouse_y,playerStats.x,playerStats.y)
 
-                light.x = playerStats.x - Math.cos(angle)*radius;
-                light.y = playerStats.y - Math.sin(angle)*radius;
+                playerStats.light_angle = angle;
 
+
+
+                /*
                 console.log(light.x,light.y);
                 console.log(playerStats.mouse_x,playerStats.mouse_y) 
                 console.log(Math.abs( Math.cos(angle)*radius),Math.abs(Math.sin(angle)*radius));
                 console.log(angle); 
-                
+                */
                 
 
                 });
+
+                this.input.on('pointerdown', function PointerDown(pointer){
+
+                    if(playerStats.pointerDown == true){
+                        playerStats.pointerDown = false;
+                    }else{
+                        playerStats.pointerDown = true;
+                    }
+                })
 
                 
 
@@ -204,6 +232,16 @@
 
             function update(){
 
+                UpdateLight(lampe)
+
+                if(playerStats.pointerDown){
+
+                    lampe.setVisible(0);
+                }else{
+
+                    lampe.setVisible(1);
+                }
+                
 
                 playerStats.x = this.player.x;
                 playerStats.y = this.player.y;
@@ -238,6 +276,15 @@
                 }
 
 
+
+            }
+
+            function UpdateLight (light){
+
+                light.x = playerStats.x - Math.cos(playerStats.light_angle)*playerStats.light_radius;
+                light.y = playerStats.y - Math.sin(playerStats.light_angle)*playerStats.light_radius;
+
+                
 
             }
 
