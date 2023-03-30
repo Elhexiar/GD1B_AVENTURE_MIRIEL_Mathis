@@ -53,9 +53,6 @@
 
 
             var playerStats = {
- 
-
-
                 // player horizontal speed
                 playerSpeed: 300,
 
@@ -76,8 +73,18 @@
                 y: 5150,
 
                 mouse_x : 0,
-                mouse_y : 0
+                mouse_y : 0,
+
+                Torche_x : 0,
+                Torche_y : 0,
+                Torche_status :false
 }
+
+            var global_dic = {
+
+
+
+            }
 
 
 
@@ -136,12 +143,6 @@
 
                 light.x = playerStats.x - Math.cos(angle)*radius;
                 light.y = playerStats.y - Math.sin(angle)*radius;
-
-                console.log(light.x,light.y);
-                console.log(playerStats.mouse_x,playerStats.mouse_y) 
-                console.log(Math.abs( Math.cos(angle)*radius),Math.abs(Math.sin(angle)*radius));
-                console.log(angle); 
-                
                 
 
                 });
@@ -205,6 +206,8 @@
             function update(){
 
 
+
+
                 playerStats.x = this.player.x;
                 playerStats.y = this.player.y;
 
@@ -239,6 +242,16 @@
 
 
 
+            }
+
+            function update_lights(light){
+
+            }
+
+            function update_lampe(light){
+
+
+                
             }
 
 

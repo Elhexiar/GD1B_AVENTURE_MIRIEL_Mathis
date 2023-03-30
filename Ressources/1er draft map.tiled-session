@@ -3,49 +3,72 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "1erdraft.tmx",
+    "activeFile": "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "exportAsImage.includeBackgroundColor": true,
+    "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 0.25
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
         },
         "1erdraft.tmx": {
+            "expandedGroupLayers": [
+                10
+            ],
             "scale": 0.25,
-            "selectedLayer": 0,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 1702,
-                "y": 3798
+                "x": 3680,
+                "y": 3842
             }
+        },
+        "1erdraft.tmx#temp tileset": {
+            "scaleInDock": 0.33
+        },
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 4776,
+                "y": 3844
+            }
+        },
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx#tileset_v0": {
+            "scaleInDock": 0.125,
+            "scaleInEditor": 1
+        },
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx#tileset_v0_extruded": {
+            "scaleInDock": 0.0625
         },
         "temp tileset.tsx": {
             "scaleInDock": 0.25,
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/proto 1/assets",
-    "last.imagePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/Ressources",
+    "last.exportedFilePath": "D:/MIRIEL Mathis/git/GD1B_AVENTURE_MIRIEL_Mathis/GD1B_AVENTURE_MIRIEL_Mathis/proto 2/assets",
+    "last.imagePath": "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/assets",
     "map.fixedSize": false,
     "map.lastUsedExportFilter": "Tous les Fichiers (*)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 64,
     "map.tileWidth": 64,
     "openFiles": [
-        "1erdraft.tmx",
-        "temp tileset.tsx"
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx"
     ],
     "project": "1er draft map.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "temp tileset.tsx",
-        "1erdraft.tmx"
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx",
+        "1erdraft.tmx",
+        "temp tileset.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 64,
-        "width": 64
+        "height": 256,
+        "width": 256
     }
 }

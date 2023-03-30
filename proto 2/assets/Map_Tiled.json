@@ -2136,113 +2136,6 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":22,
-         "name":"light object",
-         "objects":[
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":17,
-                 "name":"",
-                 "rotation":-90,
-                 "visible":true,
-                 "width":64,
-                 "x":1980.12121212121,
-                 "y":5156.24242424242
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":18,
-                 "name":"",
-                 "rotation":90,
-                 "visible":true,
-                 "width":64,
-                 "x":1537.69696969697,
-                 "y":5092.60606060606
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":19,
-                 "name":"",
-                 "rotation":-90,
-                 "visible":true,
-                 "width":64,
-                 "x":2174.06060606061,
-                 "y":4459.27272727273
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":20,
-                 "name":"",
-                 "rotation":-90,
-                 "visible":true,
-                 "width":64,
-                 "x":1919.51515151515,
-                 "y":4825.93939393939
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":21,
-                 "name":"",
-                 "rotation":90,
-                 "visible":true,
-                 "width":64,
-                 "x":1601.33333333333,
-                 "y":4762.30303030303
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":22,
-                 "name":"",
-                 "rotation":90,
-                 "visible":true,
-                 "width":64,
-                 "x":1346.78787878788,
-                 "y":4413.81818181818
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":23,
-                 "name":"",
-                 "rotation":-90,
-                 "visible":true,
-                 "width":64,
-                 "x":2168,
-                 "y":4098.66666666667
-                }, 
-                {
-                 "class":"",
-                 "gid":2855,
-                 "height":64,
-                 "id":24,
-                 "name":"",
-                 "rotation":90,
-                 "visible":true,
-                 "width":64,
-                 "x":1346.78787878788,
-                 "y":4032
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
          "chunks":[],
          "height":0,
          "id":8,
@@ -2356,7 +2249,7 @@
                  "startx":0,
                  "starty":0,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":32,
                  "x":0,
                  "y":0
@@ -2392,7 +2285,7 @@
                  "startx":0,
                  "starty":16,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -2450,7 +2343,7 @@
                  "startx":0,
                  "starty":16,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -2508,7 +2401,7 @@
                  "startx":16,
                  "starty":16,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -2544,7 +2437,7 @@
                  "startx":16,
                  "starty":48,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -2690,7 +2583,7 @@
                  "startx":16,
                  "starty":16,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":32,
                  "x":0,
                  "y":0
@@ -2726,7 +2619,7 @@
                  "startx":16,
                  "starty":32,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -2828,7 +2721,7 @@
                  "startx":16,
                  "starty":16,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":32,
                  "x":0,
                  "y":0
@@ -2864,7 +2757,7 @@
                  "startx":16,
                  "starty":48,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":16,
                  "x":0,
                  "y":0
@@ -3071,9 +2964,138 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":23,
+         "name":"room 00 light",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":27,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1916.48484848485,
+                 "y":5183.51515151515
+                }, 
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":28,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1540.72727272727,
+                 "y":5183.51515151515
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":24,
+         "name":"room 01 light",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":29,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1858.90909090909,
+                 "y":4798.66666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":30,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1601.33333333333,
+                 "y":4804.72727272727
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":25,
+         "name":"room 02 light",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":31,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":2110.42424242424,
+                 "y":4480.48484848485
+                }, 
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":32,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1343.75757575758,
+                 "y":4483.51515151515
+                }, 
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":33,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":1346.78787878788,
+                 "y":4098.66666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":2855,
+                 "height":64,
+                 "id":34,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":2110.42424242424,
+                 "y":4092.60606060606
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":23,
- "nextobjectid":25,
+ "nextlayerid":26,
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
