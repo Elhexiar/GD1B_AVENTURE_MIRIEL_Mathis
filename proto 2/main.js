@@ -266,6 +266,7 @@ function update(){
         this.player.setVelocityY(0);
     }
 
+    /*
     if(position.is_in_room_01){
     room_00_light.forEach((l) => {
         l.setVisible(0);
@@ -273,6 +274,7 @@ function update(){
     position.is_in_room_01 = false;
 
     position.forEach((l)=>{l=false});
+    */
 
 }
 
