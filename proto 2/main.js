@@ -1,6 +1,6 @@
 var config = {
     type: Phaser.AUTO,
-    width: 900, height: 900,
+    width: 1600, height: 900,
     physics: {
         default: 'arcade',
         arcade: {
@@ -103,7 +103,7 @@ function create(){
     
     const calque_sol = carteDuNiveau.createLayer("sol",tileset);
     const calque_mur = carteDuNiveau.createLayer("mur",tileset);
-    const room_01 = carteDuNiveau.createLayer("detection room/01",tileset);
+    //const room_01 = carteDuNiveau.createLayer("detection room/01",tileset);
     
     const calque_obstacle = carteDuNiveau.createLayer("sur sol",tileset)
     
@@ -118,16 +118,39 @@ function create(){
     this.physics.add.collider(this.player, calque_mur);
 
     
-    room_00_light = [];
-    carteDuNiveau.getObjectLayer('room 00 light').objects.forEach((nl,i) => {
+    room_list = [];
+    room_test =[];
+    detect_hitbox_list = [];
+
+    room_position =[];
+ 
+
+    for(let  room =0; room <10; room++){
+        room_list[room] = [];
+        room_test[room]= [];
+        detect_hitbox_list[room]= [];
+    carteDuNiveau.getObjectLayer('room lights/room 0'+room+' light').objects.forEach((nl,i) => {
+
         
-        room_00_light[i] = this.lights.addLight(nl.x+32,nl.y+32,300).setIntensity(1.0).setColor(0xFFF03B);
+        
+        room_list[room][i]=(this.lights.addLight(nl.x+32,nl.y+32,300).setIntensity(1.0).setColor(0xFFF03B));
+        
     });
+    carteDuNiveau.getObjectLayer('detection room/room detect 0'+room).objects.forEach((nl,i) => {
+
+        detect_hitbox_list[room][i] = this.add.rectangle(nl.x+nl.width/2,nl.y+nl.height/2 , nl.width, nl.height);
+        this.physics.add.existing(detect_hitbox_list[room][i],false);
+        room_test[room][i]=i;
+
+        console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
+    });
+}
 
     calque_sol.setPipeline('Light2D').setScrollFactor(1.0);
-    calque_mur.setPipeline('Light2D');
+    //calque_mur.setPipeline('Light2D');
     calque_obstacle.setPipeline('Light2D');
-    room_01.setPipeline('Light2D');
+    //room_01.setPipeline('Light2D');
+    calque_mur.display = false
 
 
     light = this.lights.addLight(0, 0, 400).setIntensity(1).setScrollFactor(1.0);
@@ -135,10 +158,20 @@ function create(){
     this.lights.enable().setAmbientColor(0x000000);
 
     
+
+    
+    
     room_00_hitbox = this.add.rectangle(1756   , 5120, 350, 250);
     this.physics.add.existing(room_00_hitbox,false);
 
-    this.physics.add.overlap(this.player,room_00_hitbox,function is_in_room_01(){position.is_in_room_01 =true;console.log("ye")},null,this)
+    /*
+    room_list.forEach((hitbox) => {
+
+        this.physics.add.overlap(this.)
+    });
+    */
+
+    this.physics.add.overlap(this.player,room_00_hitbox,function is_in_room_01(){position.is_in_room_01 =true},null,this)
 
     
     this.input.on('pointermove', function PointerMoved(pointer) {
@@ -146,7 +179,7 @@ function create(){
         playerStats.Torche_angle = Phaser.Math.Angle.Between(playerStats.mouse_x,playerStats.mouse_y,playerStats.x,playerStats.y)
 
 
-        playerStats.mouse_x = (pointer.x)+playerStats.x-450;
+        playerStats.mouse_x = (pointer.x)+playerStats.x-800;
         playerStats.mouse_y = (pointer.y)+playerStats.y-450;
 
     
@@ -154,7 +187,7 @@ function create(){
 
     this.input.on('pointerdown', function PointerDown(pointer){
 
-        console.log("x :",(pointer.x)+playerStats.x-450,"  y :",(pointer.y)+playerStats.y-450)
+        console.log("x :",(pointer.x)+playerStats.x-800,"  y :",(pointer.y)+playerStats.y-450)
 
         if(playerStats.Torche_status){
             light.setIntensity(0);
@@ -266,15 +299,23 @@ function update(){
         this.player.setVelocityY(0);
     }
 
-    /*
+    
+    
     if(position.is_in_room_01){
-    room_00_light.forEach((l) => {
+    room_list[0].forEach((l,log) => {
+        l.setVisible(1);
+        //console.log(log)
+    });}else{
+    room_list[0].forEach((l,log) => {
         l.setVisible(0);
-    });}
+        //console.log(log)
+    })
+
+    }
     position.is_in_room_01 = false;
 
     position.forEach((l)=>{l=false});
-    */
+    
 
 }
 
