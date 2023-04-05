@@ -5,7 +5,7 @@ var config = {
         default: 'arcade',
         arcade: {
         gravity: { y: 0 },
-        debug: true
+        debug: false
         }
     },
     input:{gamepad:true},
@@ -246,9 +246,9 @@ function create(){
 
 
     // redimentionnement du monde avec les dimensions calculées via tiled
-    this.physics.world.setBounds(0, 0, 4096, 6144);
+    //this.physics.world.setBounds(0, 0, 4096, 6144);
     //  ajout du champs de la caméra de taille identique à celle du monde
-    this.cameras.main.setBounds(0, 0, 4096, 6144);
+    this.cameras.main.setBounds(0, 0, 8000, 8000);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player); 
     this.cameras.main.zoom = 1.3;
