@@ -129,6 +129,7 @@ function create(){
         room_list[room] = [];
         room_test[room]= [];
         detect_hitbox_list[room]= [];
+        room_position[room]=[];
     carteDuNiveau.getObjectLayer('room lights/room 0'+room+' light').objects.forEach((nl,i) => {
 
         
@@ -141,6 +142,10 @@ function create(){
         detect_hitbox_list[room][i] = this.add.rectangle(nl.x+nl.width/2,nl.y+nl.height/2 , nl.width, nl.height);
         this.physics.add.existing(detect_hitbox_list[room][i],false);
         room_test[room][i]=i;
+
+        room_position[room][i]= false;
+
+        this.physics.add.overlap(this.player,detect_hitbox_list[room][i],function is_in_room(){room_position[room][i] =true},null,this)
 
         console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
     });
@@ -171,7 +176,7 @@ function create(){
     });
     */
 
-    this.physics.add.overlap(this.player,room_00_hitbox,function is_in_room_01(){position.is_in_room_01 =true},null,this)
+    this.physics.add.overlap(this.player,room_00_hitbox,function is_in_room(){position.is_in_room_01 =true},null,this)
 
     
     this.input.on('pointermove', function PointerMoved(pointer) {
@@ -315,6 +320,14 @@ function update(){
     position.is_in_room_01 = false;
 
     position.forEach((l)=>{l=false});
+
+
+    for(let  room =0; room <10; room++){
+
+        room_position[room].forEach((r,i) => {
+            console.log("detect",i);
+        });
+    }
     
 
 }
