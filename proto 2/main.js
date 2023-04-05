@@ -61,8 +61,11 @@ var playerStats = {
     Torche_x : 0,
     Torche_y : 0,
     Torche_status :false,
-    Torche_radius : 100,
+    Torche_radius : 130,
     Torche_angle : 0,
+
+    Torche_in_radius : 250,
+    Torche_intenstity : 1,
 }
 
 var global_dic = {
@@ -122,8 +125,16 @@ function create(){
     room_test =[];
     detect_hitbox_list = [];
 
+    yellow = 0xf2ed4b;
+    red = 0xe20f0f;
+    green = 0xa2ec30
+    room_colors_list = [yellow,yellow,yellow,yellow,red,yellow,green,green,red,red]
+
     room_position =[];
  
+    test = carteDuNiveau.getObjectLayer('room lights/room 00 light').objects;
+
+    //test2 = test.data;
 
     for(let  room =0; room <10; room++){
         room_list[room] = [];
@@ -134,7 +145,9 @@ function create(){
 
         
         
-        room_list[room][i]=(this.lights.addLight(nl.x+32,nl.y+32,300).setIntensity(1.0).setColor(0xFFF03B));
+        room_list[room][i]=(this.lights.addLight(nl.x,nl.y,300).setIntensity(1).setColor(room_colors_list[room]));
+
+        
         
     });
     carteDuNiveau.getObjectLayer('detection room/room detect 0'+room).objects.forEach((nl,i) => {
@@ -147,7 +160,7 @@ function create(){
 
         this.physics.add.overlap(this.player,detect_hitbox_list[room][i],function is_in_room(){room_position[room][i] =true},null,this)
 
-        console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
+        //console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
     });
 }
 
@@ -156,9 +169,13 @@ function create(){
     calque_obstacle.setPipeline('Light2D');
     //room_01.setPipeline('Light2D');
     calque_mur.display = false
+    this.player.setPipeline('Light2D');
 
 
-    light = this.lights.addLight(0, 0, 400).setIntensity(1).setScrollFactor(1.0);
+    light = this.lights.addLight(0, 0, playerStats.Torche_in_radius).setIntensity(playerStats.Torche_intenstity).setScrollFactor(1.0);
+
+    torche_hitbox = this.add.circle(playerStats.SpawnXcoord, playerStats.SpawnYcoord, playerStats.Torche_in_radius);
+    this.physics.add.existing(torche_hitbox,false);
 
     this.lights.enable().setAmbientColor(0x000000);
 
@@ -234,7 +251,7 @@ function create(){
     this.cameras.main.setBounds(0, 0, 4096, 6144);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player); 
-    this.cameras.main.zoom = 1;
+    this.cameras.main.zoom = 1.3;
 
     this.anims.create({
         key: 'left',
@@ -306,26 +323,31 @@ function update(){
 
     
     
-    if(position.is_in_room_01){
-    room_list[0].forEach((l,log) => {
-        l.setVisible(1);
-        //console.log(log)
-    });}else{
-    room_list[0].forEach((l,log) => {
-        l.setVisible(0);
-        //console.log(log)
-    })
-
-    }
+    
     position.is_in_room_01 = false;
 
     position.forEach((l)=>{l=false});
 
-
+    
     for(let  room =0; room <10; room++){
 
+        if(ConsolidateDetectionHitboxs(room_position[room])){
+            room_list[room].forEach((l,log) => {
+                l.setVisible(1);
+                //console.log("visible",room,log)
+        });}else{
+            room_list[room].forEach((l,log) => {
+            l.setVisible(0);
+            //console.log("non visible",room,log)
+        })
+        
+        }
+
+        
+
         room_position[room].forEach((r,i) => {
-            console.log("detect",i);
+            room_position[room][i]= false;
+            //console.log("detect",i,r);
         });
     }
     
@@ -342,6 +364,20 @@ function Update_Torch(light){
     light.x = playerStats.Torche_x
     light.y = playerStats.Torche_y
 
+    //torche_hitbox.x = playerStats.Torche_x
+    //torche_hitbox.x = playerStats.Torche_y
 
+
+}
+
+function ConsolidateDetectionHitboxs(hitbox_list){
+
+    total = false;
+    hitbox_list.forEach((h,i) => {
+        if(h){
+            total = true;
+        }
+    });
+    return total;
 }
 

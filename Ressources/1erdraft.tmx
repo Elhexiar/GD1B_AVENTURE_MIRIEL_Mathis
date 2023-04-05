@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="1" nextlayerid="45" nextobjectid="110">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="1" nextlayerid="47" nextobjectid="151">
  <editorsettings>
   <export target="../proto 2/assets/Map_Tiled.json" format="json"/>
  </editorsettings>
@@ -1322,8 +1322,8 @@
    <object id="70" x="1665.33" y="3649.33" width="185.333" height="252"/>
   </objectgroup>
   <objectgroup id="39" name="room detect 04">
-   <object id="71" x="1564" y="3340" width="1432" height="220"/>
-   <object id="72" x="1472" y="2820" width="300" height="616"/>
+   <object id="71" x="1564" y="3316" width="1432" height="244"/>
+   <object id="72" x="1472" y="2820" width="328" height="616"/>
    <object id="73" x="1420" y="1956" width="184" height="1292"/>
    <object id="74" x="1428" y="1916" width="348" height="500"/>
   </objectgroup>
@@ -1345,14 +1345,15 @@
  </group>
  <group id="26" name="room lights">
   <objectgroup id="23" name="room 00 light">
-   <object id="36" gid="355" x="1920" y="5248" width="64" height="64"/>
-   <object id="37" gid="355" x="1537.33" y="5249.33" width="64" height="64"/>
-   <object id="58" gid="355" x="1537.33" y="5054.67" width="64" height="64"/>
-   <object id="59" gid="355" x="1918.67" y="5054.67" width="64" height="64"/>
+   <properties>
+    <property name="couleur" value="ff7d1d"/>
+   </properties>
+   <object id="135" gid="355" x="1554" y="5150" width="64" height="64"/>
+   <object id="136" gid="355" x="1896" y="5152" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="24" name="room 01 light">
-   <object id="38" gid="355" x="1853.33" y="4801.33" width="64" height="64"/>
-   <object id="39" gid="355" x="1600" y="4801.33" width="64" height="64"/>
+   <object id="137" gid="355" x="1834" y="4782" width="64" height="64"/>
+   <object id="138" gid="355" x="1624" y="4772" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="25" name="room 02 light">
    <object id="40" gid="355" x="1342.67" y="4481.33" width="64" height="64"/>
@@ -1361,6 +1362,10 @@
    <object id="43" gid="355" x="1345.33" y="4226.67" width="64" height="64"/>
    <object id="44" gid="355" x="1474.67" y="3969.33" width="64" height="64"/>
    <object id="45" gid="355" x="1990.67" y="3969.33" width="64" height="64"/>
+   <object id="141" gid="355" x="1856" y="4410" width="64" height="64"/>
+   <object id="142" gid="355" x="1604" y="4418" width="64" height="64"/>
+   <object id="143" gid="355" x="1606" y="3996" width="64" height="64"/>
+   <object id="144" gid="355" x="1844" y="3996" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="27" name="room 03 light">
    <object id="46" gid="355" x="1857.33" y="3813.33" width="64" height="64"/>
@@ -1374,9 +1379,13 @@
    <object id="52" gid="355" x="1345.33" y="2940" width="64" height="64"/>
    <object id="53" gid="355" x="1344" y="2688" width="64" height="64"/>
    <object id="54" gid="355" x="1340" y="2428" width="64" height="64"/>
-   <object id="55" gid="355" x="1606.67" y="2501.33" width="64" height="64"/>
+   <object id="55" gid="355" x="1580.67" y="2479.33" width="64" height="64"/>
    <object id="56" gid="355" x="1780" y="2002.67" width="64" height="64"/>
    <object id="57" gid="355" x="1368" y="1952" width="64" height="64"/>
+   <object id="145" gid="355" x="1760" y="3202" width="64" height="64"/>
+   <object id="146" gid="355" x="1584" y="2848" width="64" height="64"/>
+   <object id="147" gid="355" x="1758" y="2218" width="64" height="64"/>
+   <object id="148" gid="355" x="1434" y="3368" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="29" name="room 05 light">
    <object id="93" gid="355" x="2004" y="3180" width="64" height="64"/>
@@ -1397,19 +1406,25 @@
    <object id="109" gid="355" x="2864" y="2136" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="30" name="room 06 light">
-   <object id="92" gid="355" x="1874" y="2660" width="64" height="64"/>
+   <object id="92" gid="355" x="1856" y="2650" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="31" name="room 07 light">
-   <object id="86" gid="355" x="1108" y="3486" width="64" height="64"/>
+   <object id="86" gid="355" x="1154" y="3488" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="32" name="room 08 light">
-   <object id="87" gid="355" x="1142" y="2312" width="64" height="64"/>
-   <object id="88" gid="355" x="1148" y="1900" width="64" height="64"/>
+   <object id="87" gid="355" x="1148" y="2272" width="64" height="64"/>
+   <object id="88" gid="355" x="1144" y="1954" width="64" height="64"/>
   </objectgroup>
   <objectgroup id="33" name="room 09 light">
-   <object id="89" gid="355" x="798" y="2324" width="64" height="64"/>
-   <object id="90" gid="355" x="584" y="2334" width="64" height="64"/>
+   <object id="89" gid="355" x="810" y="2278" width="64" height="64"/>
+   <object id="90" gid="355" x="598" y="2280" width="64" height="64"/>
    <object id="91" gid="355" x="406" y="2106" width="64" height="64"/>
+   <object id="149" gid="355" x="478" y="2114" width="64" height="64"/>
   </objectgroup>
  </group>
+ <objectgroup id="46" name="Room desc">
+  <object id="150" x="1671" y="5094.5" width="267" height="114">
+   <text fontfamily="MS Shell Dlg 2" pixelsize="48" wrap="1">Room 00</text>
+  </object>
+ </objectgroup>
 </map>
