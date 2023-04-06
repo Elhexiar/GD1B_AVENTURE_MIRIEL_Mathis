@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx",
+    "activeFile": "1erdraft.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -16,13 +16,19 @@
         },
         "1erdraft.tmx": {
             "expandedGroupLayers": [
-                10
+                47,
+                97,
+                55,
+                10,
+                26,
+                103,
+                105
             ],
-            "scale": 0.25,
-            "selectedLayer": 6,
+            "scale": 0.75,
+            "selectedLayer": 53,
             "viewCenter": {
-                "x": 3680,
-                "y": 3842
+                "x": 1900.6666666666665,
+                "y": 5097.333333333333
             }
         },
         "1erdraft.tmx#temp tileset": {
@@ -32,8 +38,8 @@
             "scale": 0.125,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 2564,
-                "y": 2736
+                "x": 4760,
+                "y": 3828
             }
         },
         "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx#tileset_v0": {
@@ -44,7 +50,7 @@
             "scaleInDock": 0.0625
         },
         "temp tileset.tsx": {
-            "scaleInDock": 0.25,
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         }
     },
@@ -56,7 +62,8 @@
     "map.tileHeight": 64,
     "map.tileWidth": 64,
     "openFiles": [
-        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx"
+        "D:/MIRIEL Mathis/GD1B_AVENTURE_JULIE-main/forest_map.tmx",
+        "1erdraft.tmx"
     ],
     "project": "1er draft map.tiled-project",
     "property.type": "bool",

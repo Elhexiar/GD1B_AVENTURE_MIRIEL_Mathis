@@ -32,17 +32,19 @@ function preload(){
     this.load.image('checkpoint','assets/checkpoint.png')
     this.load.image('BigSaw','assets/Big_saw.png')
     this.load.image('Small_Saw','assets/Small_saw.png')
-    this.load.spritesheet('leg_sprite','assets/leg sprite sheet.png',{frameWidth: 33, frameHeight: 52 })
+    this.load.spritesheet('leg_sprite','assets/leg sprite sheet.png',{frameWidth: 33, frameHeight: 40 })
+    this.load.image('lampe','assets/flashlight.png');
     for(i = 0; i < 16 ; i++){
         this.load.image('blob '+i,'assets/blob '+i+'.png');
     }
+    this.load.spritesheet('evolved_blob','assets/evolved_blob.png',{frameWidth:25, frameHeight:61});
 }
 
 
 
 var playerStats = {
     // player horizontal speed
-    playerSpeed: 300,
+    playerSpeed: 500,
 
     // player force
     playerJump: 200,
@@ -79,6 +81,15 @@ var global_dic = {
 
 }
 
+var player_inventory = {
+
+    has_Lampe : false,
+    has_Explosive : false,
+    has_ElecTonfa : false,
+    has_TungRode : false
+
+}
+
 var position = [
 
     is_in_room_00 = false,
@@ -87,7 +98,28 @@ var position = [
 
 ]
 
+class evolved_blob {
 
+    constructor(id,x,y,width,height,texture,group,physic_engine,parent){
+        this.index = id;
+        this.x = x;
+        this.y =y;
+        this.width = width;
+        this.height = height;
+        this.texture = texture;
+        this.group = group;
+        this.physics = physic_engine;
+        this.parent = parent;
+
+        this.blob = this.physics.add.sprite(this.x+this.width/2,this.y+this.height/2,'evolved_blob').setPipeline('Light2D');
+
+        this.blob.anims.play('evolved_blob creep',true);
+        
+    }
+
+
+
+}
 
 
 var cursors;
@@ -96,6 +128,25 @@ var gameOver;
 gameOver=false;
 
 function create(){
+
+    this.anims.create({
+        key: 'walk',
+        frames: this.anims.generateFrameNumbers('leg_sprite', {start:0,end:9}),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'still',
+        frames: [{key: 'leg_sprite', frame :0}],
+        framerate: 20
+
+    })
+    this.anims.create({
+        key: 'evolved_blob creep',
+        frames: this.anims.generateFrameNumbers('evolved_blob', {start:0,end:5}),
+        frameRate: 10,
+        repeat: -1
+    });
 
 
     // permet de sauter avec la touche espace
@@ -135,7 +186,7 @@ function create(){
     detect_hitbox_list = [];
 
     yellow = 0xf2ed4b;
-    red = 0xe20f0f;
+    red = 0xF93232;
     green = 0xa2ec30
     blue = 0xB0EAE2
     room_colors_list = [yellow,yellow,yellow,yellow,red,yellow,green,green,red,red,red,red,blue,blue,blue,blue,blue,blue]
@@ -173,10 +224,28 @@ function create(){
 
         //console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
     });
+
+    list_of_ennemies=[];
+    evolved_blob_phy_group = this.physics.add.group();
+    carteDuNiveau.getObjectLayer('ennemies/tier 1').objects.forEach((ev_blob,index) => {
+
+        list_of_ennemies.push(new evolved_blob(index,ev_blob.x,ev_blob.y,ev_blob.width,ev_blob.height,'evolved_blob',evolved_blob_phy_group,this.physics,this))
+        
+
+    });
+
 }
 
 
+inventory = [];
 
+lampe_object = carteDuNiveau.getObjectLayer('items/lampe').objects[0]
+
+items = this.physics.add.group();
+
+items.create(lampe_object.x+32,lampe_object.y-32,'lampe').setPipeline('Light2D');
+
+this.physics.add.overlap(this.player,items,picked_item_up,null,this);
 
 torche_hitbox = this.add.rectangle(playerStats.SpawnXcoord,playerStats.SpawnYcoord, 80,80);
 
@@ -197,7 +266,7 @@ this.physics.add.existing(torche_hitbox,false);
     carteDuNiveau.getObjectLayer('blobs/blob '+i).objects.forEach((blob,index) => {
 
 
-        blobs.create(blob.x+32,blob.y+32,'blob '+i).setPipeline('Light2D');;
+        blobs.create(blob.x+32,blob.y-32,'blob '+i).setPipeline('Light2D');;
         
     });
 }
@@ -215,9 +284,9 @@ this.physics.add.existing(torche_hitbox,false);
     this.legs.setPipeline('Light2D');
 
 
-    light = this.lights.addLight(0, 0, playerStats.Torche_in_radius).setIntensity(playerStats.Torche_intenstity).setScrollFactor(1.0);
+    light = this.lights.addLight(0, 0, playerStats.Torche_in_radius).setIntensity(0).setScrollFactor(1.0);
 
-
+    personal_light = this.lights.addLight(0,0,60).setIntensity(0.60).setColor(0xFFFFFF)
     //torche_hitbox = this.add.circle(playerStats.SpawnXcoord, playerStats.SpawnYcoord, playerStats.Torche_in_radius);
     //this.physics.add.existing(torche_hitbox,false);
 
@@ -255,13 +324,16 @@ this.physics.add.existing(torche_hitbox,false);
 
         console.log("x :",(pointer.x)+playerStats.x-800,"  y :",(pointer.y)+playerStats.y-450)
 
-        if(playerStats.Torche_status){
-            light.setIntensity(0);
-            playerStats.Torche_status = false;
-        }else{
-            light.setIntensity(1)
-            playerStats.Torche_status = true;
-        }
+            if(player_inventory.has_Lampe){
+
+            if(playerStats.Torche_status){
+                light.setIntensity(0);
+                playerStats.Torche_status = false;
+            }else{
+                light.setIntensity(playerStats.Torche_intenstity)
+                playerStats.Torche_status = true;
+            }
+    }
 
     })
 
@@ -292,23 +364,12 @@ this.physics.add.existing(torche_hitbox,false);
     // redimentionnement du monde avec les dimensions calculées via tiled
     //this.physics.world.setBounds(0, 0, 4096, 6144);
     //  ajout du champs de la caméra de taille identique à celle du monde
-    this.cameras.main.setBounds(0, 0, 8000, 8000);
+    //this.cameras.main.setBounds(0, 0, 8000, 8000);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player); 
     this.cameras.main.zoom = 1.3;
 
-    this.anims.create({
-        key: 'walk',
-        frames: this.anims.generateFrameNumbers('leg_sprite', {start:0,end:9}),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'still',
-        frames: [{key: 'leg_sprite', frame :0}],
-        framerate: 20
 
-    })
     /*
     this.anims.create({
         key: 'turn',
@@ -335,10 +396,16 @@ var dir_down = false;
 var dir_right = false;
 var dir_left = false;
 
-
+var four_sec_clock = 0;
 
 
 function update(){
+
+    four_sec_clock = four_sec_clock+1
+    if(four_sec_clock >= 240){
+        four_sec_clock = 0;
+    }
+
 
     Update_Torch(light);
 
@@ -455,6 +522,15 @@ function update(){
             room_list[room].forEach((l,log) => {
                 l.setVisible(1);
                 //console.log("visible",room,log)
+
+                // toute les 3.5s fait clignoter les lumiere de la salle 11 pour 0.5s
+                if(room == 11 && four_sec_clock >=130){
+                l.setVisible(0);
+                //console.log("lezgongue",room,log, four_sec_clock)
+                personal_light.setIntensity(0.6)
+                }else{
+                personal_light.setIntensity(0)
+                }
         });}else{
             room_list[room].forEach((l,log) => {
             l.setVisible(0);
@@ -473,7 +549,7 @@ function update(){
 
     this.player.body.rotation = playerStats.Torche_angle * 57.22+90;
     this.legs.body.x = this.player.body.x;
-    this.legs.body.y = this.player.body.y+5;
+    this.legs.body.y = this.player.body.y+11;
     
 
 }
@@ -495,6 +571,9 @@ function Update_Torch(light){
 
     torche_hitbox.rotation = playerStats.Torche_angle;
 
+    personal_light.x = playerStats.x
+    personal_light.y = playerStats.y
+
     //torche_hitbox.x = playerStats.Torche_x
     //torche_hitbox.x = playerStats.Torche_y
 
@@ -514,7 +593,27 @@ function ConsolidateDetectionHitboxs(hitbox_list){
 
 function Torche_hit_blob(torche,blob){
 
-    blob.setVisible(false);
-    blob.body.destroy();
-    console.log(blob)
+    if(playerStats.Torche_status){
+
+        blob.setVisible(false);
+        blob.body.destroy();
+        //console.log(blob)
+}
+}
+
+function picked_item_up(player,item){
+
+    console.log(item);
+    inventory.push(item.name);
+    item.setVisible(false);
+    item.body.destroy();
+
+    if(player_inventory.has_Lampe){
+
+    }else{
+        player_inventory.has_Lampe =true;
+        playerStats.Torche_status = true;
+        light.setIntensity(playerStats.Torche_intenstity)
+    }
+
 }
