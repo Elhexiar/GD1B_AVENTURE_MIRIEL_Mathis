@@ -5,10 +5,11 @@ var config = {
         default: 'arcade',
         arcade: {
         gravity: { y: 0 },
-        debug: true
+        debug: false
         }
     },
     input:{gamepad:true},
+    maxLights : 20, 
 
     scene: {preload: preload, create: create, update: update }
 
@@ -44,7 +45,7 @@ function preload(){
 
 var playerStats = {
     // player horizontal speed
-    playerSpeed: 500,
+    playerSpeed: 200,
 
     // player force
     playerJump: 200,
@@ -100,7 +101,7 @@ var position = [
 
 class evolved_blob {
 
-    constructor(id,x,y,width,height,texture,group,physic_engine,parent){
+    constructor(id,x,y,width,height,texture,group,physic_engine,parent,mur,torche){
         this.index = id;
         this.x = x;
         this.y =y;
@@ -110,12 +111,82 @@ class evolved_blob {
         this.group = group;
         this.physics = physic_engine;
         this.parent = parent;
+        this.agro = false;
+        this.speed = 100;
+        this.invis_counter = 0;
+        this.invis_state = false;
+        this.player_torch_hitbox = torche;
+        this.pv = 3;
 
         this.blob = this.physics.add.sprite(this.x+this.width/2,this.y+this.height/2,'evolved_blob').setPipeline('Light2D');
+        this.physics.add.collider(this.blob, mur);
+        
+        this.agro_hitbox = this.parent.add.rectangle(this.x+this.width/2,this.y+this.height/2 , 300, 300);
+        this.physics.add.existing(this.agro_hitbox,false);
+        this.physics.add.overlap(this.agro_hitbox,this.parent.player,function aggroes(){this.agro = true;this.blob.setVisible(false);},null,this)
+        this.physics.add.overlap(this.blob,this.player_torch_hitbox, function torche_hits_blob(){
+            this.blob.anims.play('evolved_blob hurt');
+            if(this.invis_state == false){
+                this.pv = this.pv -1
+                this.invis_state = true
+            }
+        },null,this)
 
         this.blob.anims.play('evolved_blob creep',true);
         
     }
+
+    Update_Behavior(player){
+
+        if(this.pv <= 0){
+            this.blob.anims.play('evolved_blob dead',true);
+            this.blob.setVisible(false);
+            this.blob.body.destroy();
+            this.blob.setVisible(false);
+        }
+
+        if(this.invis_state = true){
+            this.invis_counter = this.invis_counter+1;
+            if(this.invis_counter>30){
+                this.invis_state = false;
+                this.invis_counter = 0;
+                this.blob.anims.play('evolved_blob creep')
+            }
+
+        }
+
+        if(this.agro == true){
+            //console.log(this.agro);
+            this.blob.setVisible(true)
+
+            this.blob.body.rotation = Phaser.Math.Angle.Between(this.blob.x,this.blob.y,player.x,player.y)* 57.22-90;
+
+            //console.log("x:",this.blob.x-player.x,'y:',this.blob.y-player.y)
+
+            if(this.blob.x-player.x < -25){
+            this.blob.setVelocityX(this.speed)
+            }else if(this.blob.x-player.x > 25){
+                this.blob.setVelocityX(-this.speed)
+            }else{
+                this.blob.setVelocityX(0);
+            }
+
+            if(this.blob.y-player.y < -25){
+                this.blob.setVelocityY(this.speed)
+                }else if (this.blob.y-player.y > 25){
+                    this.blob.setVelocityY(-this.speed)
+                }else{
+                    this.blob.setVelocityY(0);
+                }
+
+
+        }
+
+    }
+
+    
+
+
 
 
 
@@ -145,6 +216,18 @@ function create(){
         key: 'evolved_blob creep',
         frames: this.anims.generateFrameNumbers('evolved_blob', {start:0,end:5}),
         frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'evolved_blob hurt',
+        frames: [{key: 'evolved_blob', frame :6}],
+        framerate: 20,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'evolved_blob dead',
+        frames: [{key: 'evolved_blob', frame :7}],
+        framerate: 20,
         repeat: -1
     });
 
@@ -180,6 +263,8 @@ function create(){
 
     this.physics.add.collider(this.player, calque_mur);
 
+    this.player.setSize(25,25);
+    this.legs.setSize(25,25);
     
     room_list = [];
     room_test =[];
@@ -225,14 +310,7 @@ function create(){
         //console.log("nique",i,"x",nl.x+32,"y",nl.y+32,"w",nl.width,"h",nl.height);
     });
 
-    list_of_ennemies=[];
-    evolved_blob_phy_group = this.physics.add.group();
-    carteDuNiveau.getObjectLayer('ennemies/tier 1').objects.forEach((ev_blob,index) => {
-
-        list_of_ennemies.push(new evolved_blob(index,ev_blob.x,ev_blob.y,ev_blob.width,ev_blob.height,'evolved_blob',evolved_blob_phy_group,this.physics,this))
-        
-
-    });
+    
 
 }
 
@@ -250,7 +328,14 @@ this.physics.add.overlap(this.player,items,picked_item_up,null,this);
 torche_hitbox = this.add.rectangle(playerStats.SpawnXcoord,playerStats.SpawnYcoord, 80,80);
 
 //this.physics.add.overlap(torche_hitbox,room_00_hitbox,function torche_hit_blob(){position.is_in_room_01 =true},null,this)
+list_of_ennemies=[];
+evolved_blob_phy_group = this.physics.add.group();
+carteDuNiveau.getObjectLayer('ennemies/tier 1').objects.forEach((ev_blob,index) => {
 
+    list_of_ennemies.push(new evolved_blob(index,ev_blob.x,ev_blob.y,ev_blob.width,ev_blob.height,'evolved_blob',evolved_blob_phy_group,this.physics,this,calque_mur,torche_hitbox))
+        
+
+});
 
 
 this.physics.add.existing(torche_hitbox,false);
@@ -401,6 +486,10 @@ var four_sec_clock = 0;
 
 function update(){
 
+    list_of_ennemies.forEach((e,i) => {
+        e.Update_Behavior(this.player);
+    });
+
     four_sec_clock = four_sec_clock+1
     if(four_sec_clock >= 240){
         four_sec_clock = 0;
@@ -549,7 +638,7 @@ function update(){
 
     this.player.body.rotation = playerStats.Torche_angle * 57.22+90;
     this.legs.body.x = this.player.body.x;
-    this.legs.body.y = this.player.body.y+11;
+    this.legs.body.y = this.player.body.y;
     
 
 }
@@ -615,5 +704,12 @@ function picked_item_up(player,item){
         playerStats.Torche_status = true;
         light.setIntensity(playerStats.Torche_intenstity)
     }
+
+}
+
+function aggro_evblob(hitbox,player,name){
+
+    console.log(name)
+
 
 }
