@@ -76,12 +76,6 @@ var playerStats = {
     Torche_intenstity : 1,
 }
 
-var global_dic = {
-
-
-
-}
-
 var player_inventory = {
 
     has_Lampe : false,
@@ -91,13 +85,7 @@ var player_inventory = {
 
 }
 
-var position = [
-
-    is_in_room_00 = false,
-    is_in_room_01 = false,
-    is_in_room_02 = false,
-
-]
+var position = [];
 
 class evolved_blob {
 
@@ -233,7 +221,7 @@ function create(){
 
 
     // permet de sauter avec la touche espace
-    keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    //keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     //this.add.image(800, 800, 'fond'); 
     const carteDuNiveau = this.add.tilemap("carte");
@@ -475,13 +463,7 @@ this.physics.add.existing(torche_hitbox,false);
 }
 
 
-var still = false;
-var dir_up = false;
-var dir_down = false;
-var dir_right = false;
-var dir_left = false;
 
-var four_sec_clock = 0;
 
 
 function update(){
